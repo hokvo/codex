@@ -1,0 +1,19 @@
+name: PoC windows argv0 powershell classifier
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  poc:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show rustc/cargo versions
+        run: |
+          rustc --version
+          cargo --version
+
+      - name: Run PoC test
+        working-directory: codex-rs
+        run: cargo test -p codex-shell-command --test windows_argv0_poc -- --nocapture
